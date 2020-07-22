@@ -308,6 +308,7 @@ private:
     void update_logging2(void);
     void one_second_loop(void);
     void update_GPS(void);
+    void update_target_vel_rate(void);
     void update_current_mode(void);
     void update_mission(void);
 

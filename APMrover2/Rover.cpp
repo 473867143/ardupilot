@@ -54,6 +54,7 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] = {
     SCHED_TASK(update_current_mode,   400,    200),
     SCHED_TASK(set_servos,            400,    200),
     SCHED_TASK(update_GPS,             50,    300),
+    SCHED_TASK(update_target_vel_rate, 50,    100),
     SCHED_TASK_CLASS(AP_Baro,             &rover.barometer,        update,         10,  200),
     SCHED_TASK_CLASS(AP_Beacon,           &rover.g2.beacon,        update,         50,  200),
     SCHED_TASK_CLASS(AP_Proximity,        &rover.g2.proximity,     update,         50,  200),
@@ -308,6 +309,14 @@ void Rover::update_GPS(void)
         camera.update();
 #endif
     }
+}
+
+void Rover::update_target_vel_rate(void)
+{
+    float target_bf_vel = g2.wp_nav.get_speed();
+    float target_bf_rate = g2.wp_nav.get_turn_rate_rads();
+
+    AP::ahrs().update_target_vel_rate(target_bf_vel,target_bf_rate);
 }
 
 void Rover::update_current_mode(void)

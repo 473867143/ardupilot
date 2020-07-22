@@ -2148,14 +2148,19 @@ void GCS_MAVLINK::send_local_position() const
         return;
     }
 
+    float target_bf_vel,target_bf_rate;
+
+    target_bf_vel = ahrs.getTargetBodyFrameVelocity();
+    target_bf_rate = ahrs.getTargetBodyFrameRate();
+
     mavlink_msg_local_position_ned_send(
         chan,
         AP_HAL::millis(),
         local_position.x,
         local_position.y,
         local_position.z,
-        velocity.x,
-        velocity.y,
+        target_bf_vel,//velocity.x,
+        target_bf_rate,//velocity.y,
         velocity.z);
 }
 

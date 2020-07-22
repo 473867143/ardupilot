@@ -587,6 +587,22 @@ public:
         return _rsem;
     }
 
+    // update target body-frame vel & rate.
+    void update_target_vel_rate(float tgt_vel,float tgt_rate) {
+        tgt_bf_vel = tgt_vel;
+        tgt_bf_rate = tgt_rate;
+    }
+
+    // return target body-frame velocity
+    float getTargetBodyFrameVelocity(void) const{
+        return tgt_bf_vel;
+    }
+
+    // return target body-frame rate
+    float getTargetBodyFrameRate(void) const{
+        return tgt_bf_rate;
+    }
+
 protected:
     void update_nmea_out();
 
@@ -690,6 +706,10 @@ protected:
     // AOA and SSA
     float _AOA, _SSA;
     uint32_t _last_AOA_update_ms;
+
+    // target body frame velocity & rate
+    float tgt_bf_vel;
+    float tgt_bf_rate;
 
 private:
     static AP_AHRS *_singleton;
