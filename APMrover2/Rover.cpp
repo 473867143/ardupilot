@@ -313,8 +313,10 @@ void Rover::update_GPS(void)
 
 void Rover::update_target_vel_rate(void)
 {
-    float target_bf_vel = g2.wp_nav.get_speed();
-    float target_bf_rate = g2.wp_nav.get_turn_rate_rads();
+    //float target_bf_vel = g2.wp_nav.get_speed();
+    //float target_bf_rate = g2.wp_nav.get_turn_rate_rads();
+    float target_bf_vel = g2.attitude_control.get_desired_speed();
+    float target_bf_rate = g2.attitude_control.get_desired_turn_rate();
 
     AP::ahrs().update_target_vel_rate(target_bf_vel,target_bf_rate);
 }
